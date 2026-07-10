@@ -1,6 +1,7 @@
 # IAN
 Project for managing all assets within the IAN economy
-<img width="2048" height="1152" alt="Ian_professional_headshot" src="https://github.com/user-attachments/assets/22b47e7f-2879-4353-943d-2a1ff22d230b" />
+![Uploading Ian_professional_headshot.png…]()
+
 
 
 ## What is IAN?
