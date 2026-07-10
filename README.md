@@ -1,8 +1,6 @@
 # IAN
 Project for managing all assets within the IAN economy
-![Uploading Ian_professional_headshot.png…]()
-
-
+<img width="2048" height="1152" alt="Ian_professional_headshot" src="https://github.com/user-attachments/assets/d10bbb57-cf3b-4313-b21b-39285d80da7e" />
 
 ## What is IAN?
 IAN is the symbol for Ian Coin, a Solana-based token fueled by memes and dreams (and discord shenanigans).
