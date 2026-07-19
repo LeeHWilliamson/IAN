@@ -1,0 +1,43 @@
+.
+├── Ian.Api
+│   ├── Ian.Api.csproj
+│   ├── Ian.Api.http
+│   ├── Program.cs
+│   ├── Properties
+│   ├── appsettings.Development.json
+│   ├── appsettings.json
+│   ├── bin
+│   └── obj
+├── Ian.Bot
+│   ├── Ian.Bot.csproj
+│   ├── Program.cs
+│   ├── bin
+│   └── obj
+├── Ian.Core
+│   ├── Class1.cs
+│   ├── Ian.Core.csproj
+│   ├── Interfaces
+│   ├── Models
+│   ├── Requests
+│   ├── bin
+│   └── obj
+├── Ian.Data
+│   ├── Configurations
+│   ├── Context
+│   ├── Entities
+│   ├── Ian.Data.csproj
+│   ├── Migrations
+│   ├── bin
+│   └── obj
+├── Ian.Tests
+│   ├── GlobalUsings.cs
+│   ├── Ian.Tests.csproj
+│   ├── UnitTest1.cs
+│   ├── bin
+│   └── obj
+├── Ian.slnx
+├── README.md
+├── docker-compose.yml
+└── structure.txt
+
+24 directories, 17 files

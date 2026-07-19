@@ -1,12 +1,12 @@
+using System.Dynamic;
+
 public class User
 {
-    public Guid Id { get; set; }
+    public Guid UserId { get; set; }
 
     public ulong DiscordId { get; set; }
 
-    public string DisplayName { get; set; } = "";
-
-    public decimal Balance { get; set; }
+    public decimal Debt { get; set; }
 
     public DateTime CreatedAt { get; set; }
 }

@@ -1,0 +1,10 @@
+namespace Ian.Core.Requests;
+
+public class TransferRequest
+{
+    public Guid SenderId { get; set; }
+
+    public Guid ReceiverId { get; set; }
+
+    public decimal Amount { get; set; }
+}
