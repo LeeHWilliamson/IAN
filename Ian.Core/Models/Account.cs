@@ -6,7 +6,7 @@ public class Account
 
     public ulong DiscordId { get; set; }
 
-    public string DisplayName { get; set; } = "";
+    public string AccountName { get; set; } = "";
 
     public string AccountType { get; set; } = "Peasant";
 
