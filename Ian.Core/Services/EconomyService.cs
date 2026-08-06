@@ -1,9 +1,7 @@
 using Ian.Core.Interfaces;
 using Ian.Core.Requests;
 using Ian.Core.Models;
-using Ian.Core.Enums;
-using System.Xml.Schema;
-using System.Runtime.InteropServices.Swift;
+using Ian.Primitives.Transactions;
 
 namespace Ian.Core.Services;
 

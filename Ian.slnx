@@ -3,5 +3,6 @@
   <Project Path="Ian.Bot/Ian.Bot.csproj" />
   <Project Path="Ian.Core/Ian.Core.csproj" />
   <Project Path="Ian.Data/Ian.Data.csproj" />
+  <Project Path="Ian.Primitives/Ian.Primitives.csproj" />
   <Project Path="Ian.Tests/Ian.Tests.csproj" />
 </Solution>

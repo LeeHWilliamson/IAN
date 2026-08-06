@@ -1,4 +1,4 @@
-namespace Ian.Core.Enums;
+namespace Ian.Primitives.Transactions;
 
 public enum TransactionType
 {
