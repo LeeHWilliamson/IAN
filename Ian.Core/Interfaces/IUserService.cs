@@ -7,5 +7,5 @@ using Ian.Core.Requests;
 
 public interface IUserService
 {
-    Task<bool> UserExists(ulong DiscordId); //see if DiscordId exists in users table, if so, return True
+    Task<bool> UserExistsAsync(ulong DiscordId); //see if DiscordId exists in users table, if so, return True
 }

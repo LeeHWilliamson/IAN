@@ -9,43 +9,80 @@ namespace Ian.Core.Services;
 
 public class EconomyService : IEconomyService
 {
-    public Task<LedgerEntry> CreateLedgerEntry(TransferRequest request, TransactionType type)
+    private IUserService _userService;
+    private IAccountService _accountService;
+    public EconomyService(IUserService userService, IAccountService accountService)
+    {
+        _userService = userService;
+        _accountService = accountService;
+    }
+    public async Task<LedgerEntry> CreateLedgerEntry(TransferRequest request, TransactionType type)
     {
         var entry = new LedgerEntry();
-        entry.Id = ????
+        Console.WriteLine($"Implement sending the proper Id!");
+        entry.Id = request.SenderAccountId;
         entry.SenderAccountId = request.SenderAccountId;
         entry.ReceiverAccountId = request.ReceiverAccountId;
         entry.Amount = request.Amount;
         entry.TransactionType = type;
-        entry.Metadata = ???;
-        entry.CreatedAt = ???;
+        Console.WriteLine($"Implement sending meta data!");
+        entry.Metadata = "???";
+        entry.CreatedAt = DateTime.Now;
+        return entry;
     }
+
+    public Task<LedgerEntry> CreateLedgerEntry(TransferRequest request)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<bool> Transfer(TransferRequest request)
     {
-        // verify both users exist
-        var senderExists = await UserService.UserExists(request.SenderDiscordId);
-        var receiverExists = await UserService.UserExists(request.ReceiverDiscordId);
+        // validate sender and receivers
+        bool senderExists = await _userService.UserExistsAsync(request.SenderDiscordId);
+        bool receiverExists = await _userService.UserExistsAsync(request.ReceiverDiscordId);
+
+
         if (!senderExists || !receiverExists)
         {
             return false;
         }
         // verify both accounts exist
-        request.SenderAccountId = AccountService.AccountExists(request.SenderDiscordId, request.SenderAccountName)
-        request.ReceiverAccountId = AccountService.AccountExists(request.ReceiverDiscordId, request.ReceiverAccountName)
-        // verify sender has the skrilla
-        var senderBalance = await AccountService.GetBalance(request.SenderAccountId);
-        if senderBalance < request.Amount
+        // request.SenderAccountId = _accountService.AccountExists(request.SenderDiscordId, request.SenderAccountName);
+        // request.ReceiverAccountId = _accountService.AccountExists(request.ReceiverDiscordId, request.ReceiverAccountName);
+
+        bool sendAccountExists = await _accountService.AccountExistsAsync(
+            request.SenderDiscordId,
+            request.SenderAccountName);
+
+        bool receiverAccountExists = await _accountService.AccountExistsAsync(
+            request.ReceiverDiscordId,
+            request.ReceiverAccountName);
+
+        if (!sendAccountExists || !receiverAccountExists)
         {
             return false;
         }
-        // Assemble ledger entry
-        var entry = CreateLedgerEntry(request, "Transfer");
+
+        // verify sender has the skrilla
+        decimal senderBalance = await _accountService.GetBalance(request.SenderAccountId);
+        if (senderBalance < request.Amount)
+        {
+            return false;
+        }
+        // Create the ledger entry task
+        LedgerEntry entry = await CreateLedgerEntry(request, TransactionType.Transfer);
+
+
         // Attempt to update ledger
-        var ledgerUpdated = UpdateLedger(entry);
+        bool ledgerUpdated = await UpdateLedger(entry);
+        return ledgerUpdated;
     }
 
-    public Task<bool> UpdateLedger(LedgerEntry entry)
+    public async Task<bool> UpdateLedger(LedgerEntry entry)
     {
         //attempt to update the ledger
+        Console.WriteLine($"Method UpdateLedger always returns true because it is empty. This is a place holder.");
+        return true;
     }
 }

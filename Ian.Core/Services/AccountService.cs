@@ -35,4 +35,9 @@ public class AccountService : IAccountService
     {
         throw new NotImplementedException();
     }
+
+    public Task<bool> AccountExistsAsync(ulong discordId, string accountName)
+    {
+        throw new NotImplementedException();
+    }
 }

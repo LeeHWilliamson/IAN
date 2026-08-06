@@ -13,9 +13,11 @@ public interface IAccountService
 
     Task<Account> CreateAccount(CreateAccountRequest request);
 
-    Task <decimal> GetBalance(Guid AccountId);
+    Task<decimal> GetBalance(Guid AccountId);
 
     Task<List<LedgerEntry>> GetAccountHistory(Guid accountId);
 
     Task<List<Account>> GetAllAccounts(ulong UserId);
+
+    Task<bool> AccountExistsAsync(ulong discordId, string accountName);
 }

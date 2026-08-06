@@ -5,8 +5,10 @@ using Ian.Core.Models;
 namespace Ian.Core.Services;
 
 public class UserService : IUserService
-{    public Task<bool> UserExists(ulong UserId)
+{
+    public async Task<bool> UserExistsAsync(ulong UserId)
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"Implement verifying UserExistsAsync");
+        return true;
     }
 }
