@@ -5,7 +5,9 @@ using Ian.Core.Requests;
 
 public interface IEconomyService
 {
-    Task Transfer(TransferRequest request);
+    Task<bool> Transfer(TransferRequest request);
 
-    Task UpdateLedger(LedgerEntry entry);
+    Task<LedgerEntry> CreateLedgerEntry(TransferRequest request);
+    
+    Task<bool> UpdateLedger(LedgerEntry entry);
 }

@@ -6,12 +6,7 @@ namespace Ian.Core.Services;
 
 public class AccountService : IAccountService
 {
-    public Task<bool> GetUser(ulong UserId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<Guid?> AccountExists(ulong UserId, string AccountName)
+    public Task<Guid?> GetAccountID(ulong UserId, string AccountName)
     {
         throw new NotImplementedException();
     }
@@ -31,12 +26,12 @@ public class AccountService : IAccountService
         throw new NotImplementedException();
     }
 
-    public Task<List<Account>?> GetAllAccounts(ulong UserId)
+    public Task<List<Account>> GetAllAccounts(ulong UserId)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<LedgerEntry>> GetTransactionHistory(Guid accountId)
+    public Task<List<LedgerEntry>> GetAccountHistory(Guid accountId)
     {
         throw new NotImplementedException();
     }
