@@ -1,6 +1,5 @@
 using Ian.Core.Interfaces;
 using Ian.Core.Requests;
-using Ian.Core.Models;
 
 namespace Ian.Core.Services;
 
@@ -11,12 +10,12 @@ public class AccountService : IAccountService
         throw new NotImplementedException();
     }
 
-    public Task<Account?> GetAccount(Guid AccountId)
+    public Task<IAccount?> GetAccount(Guid AccountId)
     {
         throw new NotImplementedException();
 
     }
-    public Task<Account> CreateAccount(CreateAccountRequest request)
+    public Task<IAccount> CreateAccount(CreateAccountRequest request)
     {
         throw new NotImplementedException();
     }
@@ -26,12 +25,12 @@ public class AccountService : IAccountService
         throw new NotImplementedException();
     }
 
-    public Task<List<Account>> GetAllAccounts(ulong UserId)
+    public Task<List<IAccount>> GetAllAccounts(ulong UserId)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<LedgerEntry>> GetAccountHistory(Guid accountId)
+    public Task<List<ILedgerEntry>> GetAccountHistory(Guid accountId)
     {
         throw new NotImplementedException();
     }

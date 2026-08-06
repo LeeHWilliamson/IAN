@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <ProjectReference Include="..\Ian.Api\Ian.Api.csproj" />
+    <ProjectReference Include="..\Ian.Application\Ian.Application.csproj" />
     <ProjectReference Include="..\Ian.Core\Ian.Core.csproj" />
     <ProjectReference Include="..\Ian.Data\Ian.Data.csproj" />
     <ProjectReference Include="..\Ian.Primitives\Ian.Primitives.csproj" />

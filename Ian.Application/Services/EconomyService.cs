@@ -14,7 +14,7 @@ public class EconomyService : IEconomyService
         _userService = userService;
         _accountService = accountService;
     }
-    public async Task<LedgerEntry> CreateLedgerEntry(TransferRequest request, TransactionType type)
+    public async Task<ILedgerEntry> CreateLedgerEntry(TransferRequest request, TransactionType type)
     {
         var entry = new LedgerEntry();
         Console.WriteLine($"Implement sending the proper Id!");
@@ -29,7 +29,7 @@ public class EconomyService : IEconomyService
         return entry;
     }
 
-    public Task<LedgerEntry> CreateLedgerEntry(TransferRequest request)
+    public Task<ILedgerEntry> CreateLedgerEntry(TransferRequest request)
     {
         throw new NotImplementedException();
     }
@@ -69,7 +69,7 @@ public class EconomyService : IEconomyService
             return false;
         }
         // Create the ledger entry task
-        LedgerEntry entry = await CreateLedgerEntry(request, TransactionType.Transfer);
+        ILedgerEntry entry = await CreateLedgerEntry(request, TransactionType.Transfer);
 
 
         // Attempt to update ledger
@@ -77,7 +77,7 @@ public class EconomyService : IEconomyService
         return ledgerUpdated;
     }
 
-    public async Task<bool> UpdateLedger(LedgerEntry entry)
+    public async Task<bool> UpdateLedger(ILedgerEntry entry)
     {
         //attempt to update the ledger
         Console.WriteLine($"Method UpdateLedger always returns true because it is empty. This is a place holder.");

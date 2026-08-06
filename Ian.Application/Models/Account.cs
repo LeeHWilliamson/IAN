@@ -1,6 +1,9 @@
+using Ian.Core.Interfaces;
+using Ian.Primitives.Accounts;
+
 namespace Ian.Core.Models;
 
-public class Account
+public class Account : IAccount
 {
     public Guid Id { get; set; }
 
@@ -8,7 +11,7 @@ public class Account
 
     public string AccountName { get; set; } = "";
 
-    public string AccountType { get; set; } = "Peasant";
+    public AccountType AccountType { get; set; } = AccountType.Peasant;
 
     public decimal Balance { get; set; }
 

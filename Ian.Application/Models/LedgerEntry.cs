@@ -1,8 +1,9 @@
+using Ian.Core.Interfaces;
 using Ian.Primitives.Transactions;
 
 namespace Ian.Core.Models;
 
-public class LedgerEntry
+public class LedgerEntry : ILedgerEntry
 {
     public Guid Id { get; set; }
 
