@@ -5,4 +5,6 @@ public enum AccountType
     Peasant,
     RichKing,
     EldenLord,
+
+    Ian,
 }
