@@ -1,16 +1,15 @@
 using Microsoft.EntityFrameworkCore;
-using Ian.Core.Models;
-using System.Dynamic;
+using Ian.Core.Interfaces;
 public class IanContext : DbContext //inheritance
 {
     public DbSet<User> Users => Set<User>();
-    public DbSet<LedgerEntry> LedgerEntries => Set<LedgerEntry>();
+    public DbSet<ILedgerEntry> LedgerEntries => Set<ILedgerEntry>();
 
-    public DbSet<Account> Accounts => Set<Account>(); 
+    public DbSet<IAccount> Accounts => Set<IAccount>();
 
     public IanContext(DbContextOptions<IanContext> options)
         : base(options)
     {
-        
+
     }
 }

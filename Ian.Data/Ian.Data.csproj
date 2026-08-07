@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Ian.Core\Ian.Core.csproj" />
+    <ProjectReference Include="..\Ian.Primitives\Ian.Primitives.csproj" />
   </ItemGroup>
 
 </Project>
