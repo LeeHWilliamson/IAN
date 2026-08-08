@@ -1,5 +1,7 @@
-﻿using Ian.Core.Interfaces;
+﻿using Ian.Core.Infrastructure;
+using Ian.Core.Interfaces;
 using Ian.Core.Services;
+using Infrastructure.Application.EventBus;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,7 +31,8 @@ public class BootStrapper
         builder.Services
             .AddDiscordGateway()
             .AddApplicationCommands()
-            .AddScoped<IAccountService, AccountService>();
+            .AddScoped<IAccountService, AccountService>()
+            .AddSingleton<IEventBus, EventBus>();
 
         // Gets the secrets for the bot
         builder.Configuration.AddUserSecrets<BootStrapper>();
