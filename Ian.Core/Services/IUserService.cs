@@ -1,5 +1,5 @@
 //Handles all requests that pertain to specific users within the Ian economy (IanID, not discord or account ids)
-namespace Ian.Core.Interfaces;
+namespace Ian.Core.Services;
 
 public interface IUserService
 {

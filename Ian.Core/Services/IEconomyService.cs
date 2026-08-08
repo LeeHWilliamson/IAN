@@ -1,6 +1,7 @@
-namespace Ian.Core.Interfaces;
-
+using Ian.Core.Interfaces;
 using Ian.Core.Requests;
+
+namespace Ian.Core.Services;
 
 public interface IEconomyService
 {
