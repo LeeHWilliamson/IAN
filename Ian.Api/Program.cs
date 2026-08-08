@@ -1,3 +1,5 @@
+using Ian.Core.Interfaces;
+using Ian.Application.Services;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 Console.WriteLine(
@@ -11,7 +13,21 @@ builder.Services.AddDbContext<IanContext>(options =>
     options.UseNpgsql(
         builder.Configuration.GetConnectionString("IanDb")));
 
+builder.Services.AddScoped<IUserService, UserService>();
+
 var app = builder.Build();
+
+app.MapPost("/users", async (ulong discordId, IUserService userService) =>
+{
+    var user = await userService.CreateUser(discordId);
+
+    if (user is null)
+    {
+        return Results.Conflict("A user with that Discord ID already exists.");
+    }
+
+    return Results.Ok(user);
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
