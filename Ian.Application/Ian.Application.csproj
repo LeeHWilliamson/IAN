@@ -12,4 +12,9 @@
     <ProjectReference Include="..\Ian.Primitives\Ian.Primitives.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Serilog" />
+    <PackageReference Include="Serilog.Sinks.Console" />
+  </ItemGroup>
+
 </Project>
