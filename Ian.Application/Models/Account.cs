@@ -1,5 +1,7 @@
+using Ian.Core.Infrastructure;
 using Ian.Core.Interfaces;
 using Ian.Primitives.Accounts;
+using Ian.Primitives.Events;
 using Ian.Primitives.Transactions;
 
 namespace Ian.Application.Models;
@@ -20,7 +22,8 @@ public class Account : IAccount
 
     public decimal BaseInterestRate { get; private set; }
 
-    public Account(AccountData data)
+    private IEventBus _eventBus;
+    public Account(AccountData data, IEventBus eventBus)
     {
         Id = new();
         DiscordId = data.DiscordId;
@@ -29,6 +32,8 @@ public class Account : IAccount
         Balance = data.Balance;
         BaseInterestRate = data.BaseInterestRate;
         CreatedAt = DateTime.Now;
+
+        _eventBus = eventBus;
     }
 
     public void Deposit(Transaction transaction)
@@ -42,7 +47,7 @@ public class Account : IAccount
         IncrementBalance(transaction.Amount);
 
         //update the ledger
-        throw new NotImplementedException($"Implement updating the ledger");
+        NotifyLedger(transaction);
     }
 
     public Transaction Withdraw(Transaction transaction)
@@ -66,7 +71,7 @@ public class Account : IAccount
         DecrementBalance(transaction.Amount);
 
         // Generate a new transaction representing depositing the withdrawn money in another account
-        return new Transaction
+        var receipt = new Transaction
         (
             transaction.ReceiverAccountId,
             transaction.SenderAccountId,
@@ -74,7 +79,9 @@ public class Account : IAccount
             TransactionType.Deposit
         );
         //update the ledger
-        throw new NotImplementedException($"Implement updating the ledger");
+        NotifyLedger(receipt);
+
+        return receipt;
     }
 
     private void DecrementBalance(decimal amount)
@@ -85,5 +92,11 @@ public class Account : IAccount
     private void IncrementBalance(decimal amount)
     {
         Balance += amount;
+    }
+
+    private void NotifyLedger(Transaction transaction)
+    {
+        ILedgerEntry entry = new LedgerEntry(transaction);
+        _eventBus.Publish(new AddLedgerEntryEvent(entry));
     }
 }
