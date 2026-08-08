@@ -1,7 +1,17 @@
+using Ian.Core.Interfaces;
+
 namespace Ian.Core.Requests;
 
-public class CreateAccountRequest
+public struct CreateAccountRequest : IRequest
 {
-    public Guid RequesterUserId { get; set; }
-    public string AccountName { get; set; } = string.Empty;
+    public Guid RequesterUserId { get; private set; }
+    public string AccountName { get; private set; }
+
+    public Type RequestType => typeof(CreateAccountRequest);
+
+    public CreateAccountRequest(string accountName)
+    {
+        AccountName = accountName;
+        RequesterUserId = new();
+    }
 }
