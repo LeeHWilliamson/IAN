@@ -37,6 +37,8 @@ public class RequestHandler : IRequestHandler
                         _results.Add(TransferRules.Evaluate(transferRequest));
                         break;
                     }
+                // FOR THE LOVE OF DOG DO NOT DELETE THE MARKER
+                // --- NEW-CASE-MARKER ---
                 default:
                     {
                         Console.WriteLine($"{request.RequestType} was unhandled by the request handler.");
