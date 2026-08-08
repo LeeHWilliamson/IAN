@@ -83,6 +83,19 @@
 			"    }",
 		]
 	},
+	"New command module": {
+		"scope": "csharp",
+		"prefix": "nm",
+		"body": [
+			"using NetCord.Services.ApplicationCommands;",
+			"",
+			"namespace ${TM_FILEPATH/^.*?IAN[\\\\\\/](.*)[\\\\\\/][^\\\\\\/]+\\.cs$/$1/};",
+			"    public class ${TM_FILENAME_BASE} : ApplicationCommandModule<ApplicationCommandContext>",
+			"    {",
+			"        $0",
+			"    }",
+		]
+	},
 	"New interface": {
 		"scope": "csharp",
 		"prefix": "ni",
