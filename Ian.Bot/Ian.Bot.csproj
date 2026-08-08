@@ -8,11 +8,24 @@
     <ProjectReference Include="..\Ian.Primitives\Ian.Primitives.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.10" />
+    <PackageReference Include="NetCord.Hosting" Version="1.0.0-beta.12" />
+    <PackageReference Include="NetCordAddons.Services" Version="1.1.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <UserSecretsId>23550091-9dce-48bd-918e-eba3f54ef20e</UserSecretsId>
   </PropertyGroup>
 
 </Project>
