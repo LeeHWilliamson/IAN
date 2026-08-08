@@ -1,0 +1,131 @@
+{
+	// Place your GTB-Unity workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	// 💬 Basic syntax
+	// ${N/regex/format/options}
+	// Where:
+	// N = placeholder or tabstop number (e.g. ${1})
+	// regex = regular expression to match
+	// format = replacement text — supports transformations
+	// options = regex flags (g, i, m, etc.)
+	// 🔤 Case Transforms
+	// Transform	Example Input	Output
+	// ${1:/camelcase}	my variable name	myVariableName
+	// ${1:/pascalcase}	my variable name	MyVariableName
+	// ${1:/snakecase}	my variable name	my_variable_name
+	// ${1:/uppercase}	my variable name	MY VARIABLE NAME
+	// ${1:/lowercase}	My Variable Name	my variable name
+	// ${1:/capitalize}	my variable name	My variable name
+	// ${1:/titlecase}	my variable name	My Variable Name
+	// (Note: titlecase and capitalize aren’t officially listed, but they work in newer VS Code builds.)
+	// 🔧 Combining Transforms
+	// You can chain regex and transform logic:
+	// ${1/(.*)/prefix_${1:/camelcase}_suffix/}
+	// → Converts whatever you typed into camel case and adds a prefix/suffix.
+	// 🪄 Replace using regex groups
+	// You can also do regex captures:re
+	// ${1/([A-Z])/_\L$1/g}
+	// → Inserts underscores before uppercase letters and makes them lowercase (turning MyVariable → my_variable).
+	"NewReadOnlyProperty": {
+		"scope": "csharp",
+		"prefix": "readprop",
+		"body": [
+			"public ${1:Type} ${2:Name} => _${2/(.*)/${1:/camelcase}/};",
+			"private ${1:Type} _${2/(.*)/${1:/camelcase}/};",
+			"",
+			"$0",
+		],
+		"description": "Makes a new readonly property"
+	},
+	"NewProperty": {
+		"scope": "csharp",
+		"prefix": "prop",
+		"body": [
+			"private ${1:Type} _${2/(.*)/${1:/camelcase}/};",
+			"public ${1:Type} ${2/(.*)/${1:/pascalcase}/}",
+			"{",
+			"    get",
+			"    {",
+			"        return _${2/(.*)/${1:/camelcase}/};",
+			"    }",
+			"    set",
+			"    {",
+			"        _${2/(.*)/${1:/camelcase}/} = value;",
+			"    }",
+			"}",
+			"",
+			"$0",
+		],
+		"description": "Makes a new property"
+	},
+	"C# Script": {
+		"scope": "csharp",
+		"prefix": "cs",
+		"body": [
+			"namespace ${TM_FILEPATH/^.*?IAN[\\\\\\/](.*)[\\\\\\/][^\\\\\\/]+\\.cs$/$1/};",
+			"    public class ${TM_FILENAME_BASE}",
+			"    {",
+			"        $0",
+			"    }",
+		]
+	},
+	"New interface": {
+		"scope": "csharp",
+		"prefix": "ni",
+		"body": [
+			"namespace ${TM_FILEPATH/^.*?IAN[\\\\\\/](.*)[\\\\\\/][^\\\\\\/]+\\.cs$/$1/};",
+			"    public interface ${TM_FILENAME_BASE}",
+			"    {",
+			"        $0",
+			"    }",
+		]
+	},
+	"New Enum": {
+		"scope": "csharp",
+		"prefix": "nen",
+		"body": [
+			"namespace ${TM_FILEPATH/^.*?IAN[\\\\\\/](.*)[\\\\\\/][^\\\\\\/]+\\.cs$/$1/};",
+			"    public enum ${TM_FILENAME_BASE}",
+			"    {",
+			"        $0",
+			"    }",
+		]
+	},
+	"New event": {
+		"scope": "csharp",
+		"prefix": "ne",
+		"body": [
+			"namespace ${TM_FILEPATH/^.*?IAN[\\\\\\/](.*)[\\\\\\/][^\\\\\\/]+\\.cs$/$1/};",
+			"    public record ${TM_FILENAME_BASE}",
+			"    {",
+			"        $0",
+			"    }",
+		]
+	},
+	"New Struct": {
+		"scope": "csharp",
+		"prefix": "ns",
+		"body": [
+			"namespace ${TM_FILEPATH/^.*?IAN[\\\\\\/](.*)[\\\\\\/][^\\\\\\/]+\\.cs$/$1/};",
+			"    public struct ${TM_FILENAME_BASE}",
+			"    {",
+			"        $0",
+			"    }",
+		]
+	},
+}
+// match a single backward or forward slash => [\\\\\\/]
