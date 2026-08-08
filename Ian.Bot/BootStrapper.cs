@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Ian.Core.Interfaces;
+using Ian.Core.Services;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using NetCord;
@@ -7,26 +10,32 @@ using NetCord.Hosting.Services;
 using NetCord.Hosting.Services.ApplicationCommands;
 using NetCord.Rest;
 
-var builder = Host.CreateApplicationBuilder(args);
+namespace Ian.Bot;
 
-// Register services
-builder.Services
-    .AddDiscordGateway()
-    .AddApplicationCommands();
+public class BootStrapper
+{
+    public static async Task Main(string[] args)
+    {
 
-// Gets the secrets for the bot
-builder.Configuration.AddUserSecrets<Program>();
+        HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
-// Build everything
-var host = builder.Build();
+        // Register services
+        builder.Services
+            .AddDiscordGateway()
+            .AddApplicationCommands()
+            .AddScoped<IAccountService, AccountService>();
 
-// // Add commands using minimal APIs
-// host.AddSlashCommand("ping", "Ping!", () => "Pong!");
-// host.AddSlashCommand("ball", "Ball is life", () => "WHERE");
-// host.AddUserCommand("Username", (NetCord.User user) => user.Username);
-// host.AddMessageCommand("Length", (RestMessage message) => message.Content.Length.ToString());
+        // Gets the secrets for the bot
+        builder.Configuration.AddUserSecrets<BootStrapper>();
 
-// Add commands from a module
-host.AddModules(typeof(Program).Assembly);
+        // Build everything
+        IHost host = builder.Build();
 
-await host.RunAsync();
+        // Add commands from a module
+        host.AddModules(typeof(BootStrapper).Assembly);
+
+
+        await host.RunAsync();
+    }
+}
+
