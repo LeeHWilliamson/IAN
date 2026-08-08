@@ -1,0 +1,29 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Thomas",
+    "classifications": [
+        "Action"
+    ],
+    "identity": "IAN.ActionTemplate",
+    "name": "IAN Action (Request/Result/Rules)",
+    "shortName": "action",
+    "sourceName": "ActionName",
+    "tags": {
+        "language": "C#",
+        "type": "item"
+    },
+    "sources": [
+        {
+            "source": "./Requests",
+            "target": "./Ian.Core/Requests"
+        },
+        {
+            "source": "./Results",
+            "target": "./Ian.Core/Results"
+        },
+        {
+            "source": "./Rules",
+            "target": "./Ian.Core/Rules"
+        }
+    ]
+}
