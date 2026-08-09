@@ -4,14 +4,14 @@ namespace Ian.Core.Requests;
 
 public struct CreateAccountRequest : IRequest
 {
-    public Guid RequesterUserId { get; private set; }
+    public ulong RequesterId { get; private set; }
     public string AccountName { get; private set; }
 
     public Type RequestType => typeof(CreateAccountRequest);
 
-    public CreateAccountRequest(string accountName)
+    public CreateAccountRequest(string accountName, ulong userId)
     {
         AccountName = accountName;
-        RequesterUserId = new();
+        RequesterId = userId;
     }
 }

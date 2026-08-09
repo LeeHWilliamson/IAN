@@ -1,4 +1,5 @@
 using System.Dynamic;
+using Ian.Core.Interfaces;
 
 public class User
 {
@@ -9,4 +10,6 @@ public class User
     public decimal Debt { get; set; }
 
     public DateTime CreatedAt { get; set; }
+
+    public IPortfolio Portfolio { get; private set; }
 }

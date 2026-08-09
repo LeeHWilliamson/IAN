@@ -1,6 +1,6 @@
+using Ian.Application.Models;
 using Ian.Core.Interfaces;
 using Ian.Core.Requests;
-using Ian.Core.Models;
 using Ian.Primitives.Transactions;
 
 namespace Ian.Core.Services;
@@ -14,25 +14,25 @@ public class EconomyService : IEconomyService
         _userService = userService;
         _accountService = accountService;
     }
-    public async Task<ILedgerEntry> CreateLedgerEntry(TransferRequest request, TransactionType type)
-    {
-        var entry = new LedgerEntry();
-        Console.WriteLine($"Implement sending the proper Id!");
-        entry.Id = request.SenderAccountId;
-        entry.SenderAccountId = request.SenderAccountId;
-        entry.ReceiverAccountId = request.ReceiverAccountId;
-        entry.Amount = request.Amount;
-        entry.TransactionType = type;
-        Console.WriteLine($"Implement sending meta data!");
-        entry.Metadata = "???";
-        entry.CreatedAt = DateTime.Now;
-        return entry;
-    }
+    // public async Task<ILedgerEntry> CreateLedgerEntry(TransferRequest request, TransactionType type)
+    // {
+    //     var entry = new LedgerEntry();
+    //     Console.WriteLine($"Implement sending the proper Id!");
+    //     entry.Id = request.SenderAccountId;
+    //     entry.SenderAccountId = request.SenderAccountId;
+    //     entry.ReceiverAccountId = request.ReceiverAccountId;
+    //     entry.Amount = request.Amount;
+    //     entry.TransactionType = type;
+    //     Console.WriteLine($"Implement sending meta data!");
+    //     entry.Metadata = "???";
+    //     entry.CreatedAt = DateTime.Now;
+    //     return entry;
+    // }
 
-    public Task<ILedgerEntry> CreateLedgerEntry(TransferRequest request)
-    {
-        throw new NotImplementedException();
-    }
+    // public Task<ILedgerEntry> CreateLedgerEntry(TransferRequest request)
+    // {
+    //     throw new NotImplementedException();
+    // }
 
     public async Task<bool> Transfer(TransferRequest request)
     {
@@ -69,12 +69,13 @@ public class EconomyService : IEconomyService
             return false;
         }
         // Create the ledger entry task
-        ILedgerEntry entry = await CreateLedgerEntry(request, TransactionType.Transfer);
+        // ILedgerEntry entry = await CreateLedgerEntry(request, TransactionType.Transfer);
 
 
         // Attempt to update ledger
-        bool ledgerUpdated = await UpdateLedger(entry);
-        return ledgerUpdated;
+        // bool ledgerUpdated = await UpdateLedger(entry);
+        Console.WriteLine($"Transfer method always returns true because it is empty. This is a place holder.");
+        return true;
     }
 
     public async Task<bool> UpdateLedger(ILedgerEntry entry)

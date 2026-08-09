@@ -6,7 +6,7 @@ namespace Ian.Application.Models;
 /// <summary>
 /// A class that records specific transactions
 /// </summary>
-public class LedgerEntry : ILedgerEntry
+public struct LedgerEntry : ILedgerEntry
 {
     // Transaction id
     public Guid Id { get; private set; }

@@ -8,6 +8,13 @@ namespace Ian.Application.RequestHandling;
 public class RequestHandler : IRequestHandler
 {
     private List<IResult> _results = new();
+
+    public IResult EvaluateRequest(IRequest request)
+    {
+        List<IResult> results = EvaluateRequests(new List<IRequest> { request });
+        return results[0];
+    }
+
     public List<IResult> EvaluateRequests(List<IRequest> requests)
     {
         _results.Clear();
@@ -38,6 +45,11 @@ public class RequestHandler : IRequestHandler
                         break;
                     }
                 // FOR THE LOVE OF DOG DO NOT DELETE THE MARKER
+                case TestRequest TestRequest_:
+                    {
+                        _results.Add(TestRules.Evaluate(TestRequest_));
+                        break;
+                    }
                 // --- NEW-CASE-MARKER ---
                 default:
                     {
@@ -49,3 +61,6 @@ public class RequestHandler : IRequestHandler
         return _results;
     }
 }
+
+
+

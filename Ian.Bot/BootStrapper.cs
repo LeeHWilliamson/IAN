@@ -1,4 +1,5 @@
-﻿using Ian.Core.Infrastructure;
+﻿using Ian.Application.RequestHandling;
+using Ian.Core.Infrastructure;
 using Ian.Core.Interfaces;
 using Ian.Core.Services;
 using Infrastructure.Application.EventBus;
@@ -32,7 +33,8 @@ public class BootStrapper
             .AddDiscordGateway()
             .AddApplicationCommands()
             .AddScoped<IAccountService, AccountService>()
-            .AddSingleton<IEventBus, EventBus>();
+            .AddSingleton<IEventBus, EventBus>()
+            .AddSingleton<IRequestHandler, RequestHandler>();
 
         // Gets the secrets for the bot
         builder.Configuration.AddUserSecrets<BootStrapper>();

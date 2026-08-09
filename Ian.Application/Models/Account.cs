@@ -9,17 +9,11 @@ namespace Ian.Application.Models;
 public class Account : IAccount
 {
     public Guid Id { get; private set; }
-
     public ulong DiscordId { get; private set; }
-
     public string AccountName { get; private set; } = "";
-
     public AccountType AccountType { get; private set; } = AccountType.Peasant;
-
     public decimal Balance { get; private set; }
-
     public DateTime CreatedAt { get; private set; }
-
     public decimal BaseInterestRate { get; private set; }
 
     private IEventBus _eventBus;

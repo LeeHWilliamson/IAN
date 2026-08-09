@@ -1,4 +1,8 @@
+using System.Diagnostics;
 using Ian.Core.Interfaces;
+using Ian.Core.Requests;
+using Ian.Core.Results;
+using Ian.Core.Services;
 using NetCord.Services.ApplicationCommands;
 
 namespace Ian.Bot.BotCommands;
@@ -6,11 +10,13 @@ namespace Ian.Bot.BotCommands;
 public class AccountModule : ApplicationCommandModule<ApplicationCommandContext>
 {
     private readonly IAccountService _accountService;
+    private readonly IRequestHandler _requestHandler;
 
-    public AccountModule(IAccountService accountService)
+    public AccountModule(IAccountService accountService, IRequestHandler requestHandler)
     {
         Console.WriteLine($"Instantiating AccountModule");
         _accountService = accountService;
+        _requestHandler = requestHandler;
     }
 
     [SlashCommand("balance", "Check your account balance")]
@@ -21,7 +27,7 @@ public class AccountModule : ApplicationCommandModule<ApplicationCommandContext>
     }
 
     [SlashCommand("accountbalance", "Prints the balance for a specific account")]
-    public async Task<string> EchoTest(string message)
+    public async Task<string> CheckAccountBalance(string message)
     {
         // cast the string to whatever we use to look up accounts
 
@@ -33,5 +39,14 @@ public class AccountModule : ApplicationCommandModule<ApplicationCommandContext>
 
         // return the balance
         return $"{message} balance: poor";
+    }
+
+    [SlashCommand("openaccount", "Opens a new account with the given name")]
+    public async Task<string> OpenAccount(string accountName)
+    {
+        // Request opening a new account for this user
+        IResult res = _requestHandler.EvaluateRequest(new CreateAccountRequest(accountName, Context.User.Id));
+
+        return "fired";
     }
 }

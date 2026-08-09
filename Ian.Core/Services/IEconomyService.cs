@@ -7,7 +7,7 @@ public interface IEconomyService
 {
     Task<bool> Transfer(TransferRequest request);
 
-    Task<ILedgerEntry> CreateLedgerEntry(TransferRequest request);
+    // Task<ILedgerEntry> CreateLedgerEntry(TransferRequest request);
 
-    Task<bool> UpdateLedger(ILedgerEntry entry);
+    // Task<bool> UpdateLedger(ILedgerEntry entry);
 }

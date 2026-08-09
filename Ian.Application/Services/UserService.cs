@@ -1,7 +1,3 @@
-using Ian.Core.Interfaces;
-using Ian.Core.Requests;
-using Ian.Core.Models;
-
 namespace Ian.Core.Services;
 
 public class UserService : IUserService

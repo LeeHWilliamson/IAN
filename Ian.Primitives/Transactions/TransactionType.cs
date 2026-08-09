@@ -16,4 +16,5 @@ public enum TransactionType
     // if we have transfer, do we need deposit and withdraw types? A transfer implies a transfer between owned accounts while deposit and withdraw imply money flow to/from an owned account to and external source/sink...
     Deposit,
     Withdraw,
+    Receipt, // would this be useful for anything but depositing? 
 }
