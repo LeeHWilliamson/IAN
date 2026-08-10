@@ -10,13 +10,13 @@ namespace Ian.Bot.BotCommands;
 public class AccountModule : ApplicationCommandModule<ApplicationCommandContext>
 {
     private readonly IAccountService _accountService;
-    private readonly IRequestHandler _requestHandler;
+    private readonly ICommandOrchestrator _commandOrchestrator;
 
-    public AccountModule(IAccountService accountService, IRequestHandler requestHandler)
+    public AccountModule(IAccountService accountService, ICommandOrchestrator commandOrchestrator)
     {
         Console.WriteLine($"Instantiating AccountModule");
         _accountService = accountService;
-        _requestHandler = requestHandler;
+        _commandOrchestrator = commandOrchestrator;
     }
 
     [SlashCommand("balance", "Check your account balance")]
@@ -45,8 +45,8 @@ public class AccountModule : ApplicationCommandModule<ApplicationCommandContext>
     public async Task<string> OpenAccount(string accountName)
     {
         // Request opening a new account for this user
-        IResult res = _requestHandler.EvaluateRequest(new CreateAccountRequest(accountName, Context.User.Id));
-
-        return "fired";
+        return _commandOrchestrator.RouteRequest(new CreateAccountRequest(accountName, Context.User.Id));
     }
+
+
 }

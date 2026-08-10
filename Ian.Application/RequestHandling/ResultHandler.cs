@@ -48,11 +48,6 @@ public class ResultHandler : IResultHandler
                         break;
                     }
                 // FOR THE LOVE OF DOG DO NOT DELETE THE MARKER
-                case TestResult TestResult_:
-                    {
-                        // handle the results
-                        break;
-                    }
                 // --- NEW-CASE-MARKER ---
                 default:
                     {

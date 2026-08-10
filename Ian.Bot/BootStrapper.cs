@@ -1,4 +1,6 @@
 ﻿using Ian.Application.RequestHandling;
+using Ian.Application.ResultHandling;
+using Ian.Application.Services;
 using Ian.Core.Infrastructure;
 using Ian.Core.Interfaces;
 using Ian.Core.Services;
@@ -11,7 +13,10 @@ using NetCord;
 using NetCord.Hosting.Gateway;
 using NetCord.Hosting.Services;
 using NetCord.Hosting.Services.ApplicationCommands;
+using NetCord.Hosting.Services.ComponentInteractions;
 using NetCord.Rest;
+using NetCord.Services.ApplicationCommands;
+using NetCord.Services.ComponentInteractions;
 using Serilog;
 
 namespace Ian.Bot;
@@ -32,9 +37,13 @@ public class BootStrapper
         builder.Services
             .AddDiscordGateway()
             .AddApplicationCommands()
+            .AddComponentInteractions<ButtonInteraction, ButtonInteractionContext>()
             .AddScoped<IAccountService, AccountService>()
-            .AddSingleton<IEventBus, EventBus>()
-            .AddSingleton<IRequestHandler, RequestHandler>();
+            .AddScoped<IBetService, BetService>()
+            .AddScoped<IRequestHandler, RequestHandler>()
+            .AddScoped<IResultHandler, ResultHandler>()
+            .AddScoped<ICommandOrchestrator, CommandOrchestrator>()
+            .AddSingleton<IEventBus, EventBus>();
 
         // Gets the secrets for the bot
         builder.Configuration.AddUserSecrets<BootStrapper>();

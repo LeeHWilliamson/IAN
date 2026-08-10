@@ -7,11 +7,11 @@ public class CreateAccountRules
 {
     public static CreateAccountResult Evaluate(CreateAccountRequest request)
     {
-        // Evlaute your rules for getting the account balance, ideally everything you need to evaluate the rules are in the request
+        // Evaluate rules to make an account
 
-        // check that user exists
+        // is the name unique
 
-        // check that user's account exists
+        // does the user have permission to make this account type?
 
         Console.WriteLine($"This doesn't do anything but blindly approve requests");
         return Approved();

@@ -45,11 +45,6 @@ public class RequestHandler : IRequestHandler
                         break;
                     }
                 // FOR THE LOVE OF DOG DO NOT DELETE THE MARKER
-                case TestRequest TestRequest_:
-                    {
-                        _results.Add(TestRules.Evaluate(TestRequest_));
-                        break;
-                    }
                 // --- NEW-CASE-MARKER ---
                 default:
                     {
