@@ -2,6 +2,6 @@ namespace Ian.Core.Interfaces;
 
 public interface IRequestHandler
 {
-    public IResult EvaluateRequest(IRequest request);
-    public List<IResult> EvaluateRequests(List<IRequest> requests);
+    public Task<IResult> EvaluateRequestAsync(IRequest request);
+    public Task<List<IResult>> EvaluateRequestsAsync(List<IRequest> requests);
 }

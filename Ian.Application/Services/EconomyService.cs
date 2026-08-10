@@ -63,7 +63,7 @@ public class EconomyService : IEconomyService
         }
 
         // verify sender has the skrilla
-        decimal senderBalance = await _accountService.GetBalance(request.SenderAccountId);
+        decimal senderBalance = await _accountService.GetBalanceAsync(request.SenderAccountId);
         if (senderBalance < request.Amount)
         {
             return false;

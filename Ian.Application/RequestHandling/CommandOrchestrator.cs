@@ -11,15 +11,15 @@ public class CommandOrchestrator : ICommandOrchestrator
         _requestHandler = requestHandler;
         _resultHandler = resultHandler;
     }
-    public string RouteRequest(IRequest request)
+    public async Task<string> RouteRequest(IRequest request)
     {
-        IResult result = _requestHandler.EvaluateRequest(request);
+        IResult result = await _requestHandler.EvaluateRequestAsync(request);
         return _resultHandler.EvaluateResult(result);
     }
 
-    public List<string> RouteRequests(List<IRequest> requests)
+    public async Task<List<string>> RouteRequests(List<IRequest> requests)
     {
-        List<IResult> results = _requestHandler.EvaluateRequests(requests);
+        List<IResult> results = await _requestHandler.EvaluateRequestsAsync(requests);
         return _resultHandler.EvaluateResults(results);
     }
 }

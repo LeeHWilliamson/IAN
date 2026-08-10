@@ -2,23 +2,24 @@
 using Ian.Core.Interfaces;
 
 using Ian.Core.Requests;
+using Ian.Core.Results;
 using Ian.Primitives.Accounts;
 
 namespace Ian.Core.Services;
 
 public interface IAccountService
 {
-    public Task<Guid?> GetAccountID(ulong UserId, string AccountName);
+    public Task<Guid?> GetAccountIDAsync(ulong UserId, string AccountName);
 
-    public Task<IAccountData?> GetAccount(Guid AccountId); //
+    public Task<IAccountData?> GetAccountAsync(Guid AccountId); //
 
-    public Task<IAccount> CreateAccount(CreateAccountRequest request);
+    public Task<IAccount> CreateAccountAsync(CreateAccountResult request);
 
-    public Task<decimal> GetBalance(Guid AccountId);
+    public Task<decimal> GetBalanceAsync(Guid AccountId);
 
-    public Task<List<ILedgerEntry>> GetAccountHistory(Guid accountId);
+    public Task<List<ILedgerEntry>> GetAccountHistoryAsync(Guid accountId);
 
-    public Task<List<IAccountData>> GetAllAccounts(ulong UserId);
+    public Task<List<IAccountData>> GetAllAccountsAsync(ulong UserId);
 
     public Task<bool> AccountExistsAsync(ulong discordId, string accountName);
 }

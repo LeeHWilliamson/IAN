@@ -1,12 +1,20 @@
 using Ian.Core.Interfaces;
 using Ian.Core.Results;
+using Ian.Core.Services;
+using Ian.Data.Entities;
 
 namespace Ian.Application.ResultHandling;
 
 public class ResultHandler : IResultHandler
 {
     private List<string> _messages = new();
-
+    private IAccountService _accountService;
+    private IUserService _userService;
+    public ResultHandler(IAccountService accountService, IUserService userService)
+    {
+        _accountService = accountService;
+        _userService = userService;
+    }
     public string EvaluateResult(IResult result)
     {
         List<string> message = EvaluateResults(new List<IResult> { result });
@@ -22,7 +30,7 @@ public class ResultHandler : IResultHandler
             if (!result.Approved)
             {
                 // tell the user the request was denied
-                _messages.Add($"Request denied");
+                _messages.Add($"{result} request denied");
                 continue;
             }
             switch (result)
@@ -35,6 +43,8 @@ public class ResultHandler : IResultHandler
                 case CreateAccountResult createResult:
                     {
                         // Create an account and notify the user
+                        _accountService.CreateAccountAsync(createResult);
+                        _messages.Add($"Created new account for {createResult.RequesterId} named {createResult.AccountName}");
                         break;
                     }
                 case GetTransactionHistoryResult historyResult:
@@ -48,6 +58,13 @@ public class ResultHandler : IResultHandler
                         break;
                     }
                 // FOR THE LOVE OF DOG DO NOT DELETE THE MARKER
+                case AddUserResult AddUserResult_:
+                    {
+                        // handle the results
+                        _userService.AddNewUserAsync(AddUserResult_);
+                        _messages.Add($"Added new user with id: {AddUserResult_.DiscordId}");
+                        break;
+                    }
                 // --- NEW-CASE-MARKER ---
                 default:
                     {
@@ -60,3 +77,4 @@ public class ResultHandler : IResultHandler
         return _messages;
     }
 }
+

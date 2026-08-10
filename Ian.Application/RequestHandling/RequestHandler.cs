@@ -1,21 +1,32 @@
 using System.Runtime.InteropServices;
 using Ian.Core.Interfaces;
 using Ian.Core.Requests;
+using Ian.Core.Results;
 using Ian.Core.Rules;
+using Ian.Core.Services;
 
 namespace Ian.Application.RequestHandling;
 
 public class RequestHandler : IRequestHandler
 {
     private List<IResult> _results = new();
+    private IUserService _userService;
+    private IAccountService _accountService;
 
-    public IResult EvaluateRequest(IRequest request)
+    public RequestHandler(IUserService userService, IAccountService accountService)
     {
-        List<IResult> results = EvaluateRequests(new List<IRequest> { request });
+        _userService = userService;
+        _accountService = accountService;
+    }
+
+
+    public async Task<IResult> EvaluateRequestAsync(IRequest request)
+    {
+        List<IResult> results = await EvaluateRequestsAsync(new List<IRequest> { request });
         return results[0];
     }
 
-    public List<IResult> EvaluateRequests(List<IRequest> requests)
+    public async Task<List<IResult>> EvaluateRequestsAsync(List<IRequest> requests)
     {
         _results.Clear();
         for (int i = 0; i < requests.Count; i++)
@@ -31,7 +42,8 @@ public class RequestHandler : IRequestHandler
                     }
                 case CreateAccountRequest createRequest:
                     {
-                        _results.Add(CreateAccountRules.Evaluate(createRequest));
+                        CreateAccountResult res = await CreateAccountRules.Evaluate(createRequest, _userService, _accountService);
+                        _results.Add(res);
                         break;
                     }
                 case GetTransactionHistoryRequest historyRequest:
@@ -42,6 +54,12 @@ public class RequestHandler : IRequestHandler
                 case TransferRequest transferRequest:
                     {
                         _results.Add(TransferRules.Evaluate(transferRequest));
+                        break;
+                    }
+                case AddUserRequest addUserRequest:
+                    {
+                        AddUserResult res = await AddUserRules.Evaluate(addUserRequest, _userService);
+                        _results.Add(res);
                         break;
                     }
                 // FOR THE LOVE OF DOG DO NOT DELETE THE MARKER
