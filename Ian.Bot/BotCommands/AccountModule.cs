@@ -12,21 +12,23 @@ public class AccountModule : ApplicationCommandModule<ApplicationCommandContext>
 {
     private readonly ICommandOrchestrator _commandOrchestrator;
 
-    public AccountModule(IAccountService accountService, ICommandOrchestrator commandOrchestrator)
+    public AccountModule(ICommandOrchestrator commandOrchestrator)
     {
         Console.WriteLine($"Instantiating AccountModule");
         _commandOrchestrator = commandOrchestrator;
     }
-
-    [SlashCommand("balance", "Check your account balance")]
-    public async Task<string> GetBalance()
+    [SlashCommand("portfolio", "Prints the details of your portfolio")]
+    public async Task<string> PrintPortfolio()
     {
+        // get the user id
         ulong id = Context.User.Id;
-        return $"User {id} is broke";
+        // submit a portfolio print request
+        string res = await _commandOrchestrator.RouteRequest(new ViewPortfolioRequest(id));
+        return res;
     }
 
-    [SlashCommand("accountbalance", "Prints the balance for a specific account")]
-    public async Task<string> CheckAccountBalance(string message)
+    [SlashCommand("balance", "Prints the balance for a specific account")]
+    public async Task<string> CheckAccountBalance(string accountName)
     {
         // cast the string to whatever we use to look up accounts
 

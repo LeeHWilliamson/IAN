@@ -13,7 +13,7 @@ public interface IAccountService
 
     public Task<IAccountData?> GetAccountAsync(Guid AccountId); //
 
-    public Task<IAccount> CreateAccountAsync(CreateAccountResult request);
+    public Task<IAccount> CreateAccountAsync(CreateAccountResult result);
 
     public Task<decimal> GetBalanceAsync(Guid AccountId);
 
@@ -22,4 +22,6 @@ public interface IAccountService
     public Task<List<IAccountData>> GetAllAccountsAsync(ulong UserId);
 
     public Task<bool> AccountExistsAsync(ulong discordId, string accountName);
+
+    public Task<IPortfolio> GetPortfolioAsync(ViewPortfolioResult result);
 }

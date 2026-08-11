@@ -65,6 +65,11 @@ public class ResultHandler : IResultHandler
                         _messages.Add($"Added new user with id: {AddUserResult_.DiscordId}");
                         break;
                     }
+                case ViewPortfolioResult ViewPortfolioResult_:
+                    {
+                        // handle the results
+                        break;
+                    }
                 // --- NEW-CASE-MARKER ---
                 default:
                     {
@@ -77,4 +82,5 @@ public class ResultHandler : IResultHandler
         return _messages;
     }
 }
+
 

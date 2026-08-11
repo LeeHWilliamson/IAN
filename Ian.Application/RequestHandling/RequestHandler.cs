@@ -63,6 +63,11 @@ public class RequestHandler : IRequestHandler
                         break;
                     }
                 // FOR THE LOVE OF DOG DO NOT DELETE THE MARKER
+                case ViewPortfolioRequest ViewPortfolioRequest_:
+                    {
+                        _results.Add(ViewPortfolioRules.Evaluate(ViewPortfolioRequest_));
+                        break;
+                    }
                 // --- NEW-CASE-MARKER ---
                 default:
                     {
@@ -74,6 +79,7 @@ public class RequestHandler : IRequestHandler
         return _results;
     }
 }
+
 
 
 

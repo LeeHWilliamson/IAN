@@ -61,4 +61,14 @@ public class InMemoryAccountService : IAccountService
     {
         throw new NotImplementedException();
     }
+
+    public async Task<IPortfolio> GetPortfolioAsync(ViewPortfolioResult result)
+    {
+        // get the user
+        IUser user = await _userService.GetUserAsync(result.Id);
+        // get their portfolio
+        IPortfolio portfolio = user.Portfolio;
+        // format at it and return
+        return portfolio;
+    }
 }
